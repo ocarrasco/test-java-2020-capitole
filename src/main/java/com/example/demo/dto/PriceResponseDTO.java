@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import com.example.demo.model.Prices;
 import com.example.demo.utils.DateUtil;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class PriceResponseDTO {
 
     private Integer brandId;
@@ -18,14 +20,14 @@ public class PriceResponseDTO {
     private Double finalPrice;
 
     public static PriceResponseDTO from(Prices prices) {
-        var dto = new PriceResponseDTO();
-        dto.setBrandId(prices.getBrand().getId());
-        dto.setProductId(prices.getProduct().getId());
-        dto.setPriceList(prices.getPriceList());
-        dto.setStartDate(DateUtil.toLocalDateTime(prices.getStartDate()));
-        dto.setEndDate(DateUtil.toLocalDateTime(prices.getEndDate()));
-        dto.setFinalPrice(prices.getPrice());
-        return dto;
+        return PriceResponseDTO.builder()
+                .brandId(prices.getBrand().getId())
+                .productId(prices.getProduct().getId())
+                .priceList(prices.getPriceList())
+                .startDate(DateUtil.toLocalDateTime(prices.getStartDate()))
+                .endDate(DateUtil.toLocalDateTime(prices.getEndDate()))
+                .finalPrice(prices.getPrice())
+                .build();
     }
 
 }
