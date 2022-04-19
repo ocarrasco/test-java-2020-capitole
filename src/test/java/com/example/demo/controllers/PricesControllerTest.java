@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import com.example.demo.dto.PriceRequestDTO;
 import com.example.demo.dto.PriceResponseDTO;
 import com.example.demo.services.IPriceService;
+import com.example.demo.validations.PriceRequestDTOValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
@@ -28,6 +29,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class PricesControllerTest {
 
     private static final String CONTROLLER_URL = "/prices";
+
+    @MockBean
+    private PriceRequestDTOValidator priceRequestDTOValidator;
 
     @MockBean
     private IPriceService priceService;
